@@ -24,9 +24,11 @@ export default function ContentPage() {
   const [error, setError] = useState<string>("");
 
   useEffect(() => {
-    if (!slug) return;
+    // If route is a direct path like /contact-us (no :slug param), resolve slug from pathname
+    const routeSlug = slug || window.location.pathname.replace(/^\//, "");
+    if (!routeSlug) return;
 
-    if (slug === "terms-conditions") {
+    if (routeSlug === "terms-conditions") {
       const metaTitle = "Terms & Conditions | Ashish Property";
       const metaDescription =
         "Terms of using Ashish Property’s website and services. Read service scope, pricing, liability and dispute policy.";
