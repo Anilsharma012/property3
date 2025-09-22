@@ -284,20 +284,13 @@ export const apiRequest = async (
         "⚠️ apiRequest failed in Builder preview without API_BASE. Returning graceful failure.",
         error?.message || error,
       );
-      return { data: {}, status: 0, ok: false } as any;
+      return { data: null, status: 0, ok: false } as any;
     }
 
-    if (error && error.name === "AbortError") {
-      throw new Error(`Request timeout after ${finalTimeout}ms`);
-    }
-    if (error.message?.includes("Failed to fetch")) {
-      throw new Error(`Network error: Unable to connect to server at ${url}`);
-    }
-    // If the abort was triggered with a reason, provide that reason
-    if (error?.message && error.message !== "AbortError") {
-      throw new Error(error.message);
-    }
-    throw error;
+    // For network errors and timeouts, return a graceful failure instead of throwing
+    // so UI polling hooks or optional features don't crash the app.
+    console.error("apiRequest network error:", error?.message || error);
+    return { data: null, status: 0, ok: false } as any;
   }
 }; // 👈 NOTE: function yahin close ho rahi hai
 
