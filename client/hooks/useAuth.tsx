@@ -5,6 +5,7 @@ import {
   useEffect,
   ReactNode,
 } from "react";
+import { clearToasts } from "@/hooks/use-toast";
 
 interface User {
   id: string;
