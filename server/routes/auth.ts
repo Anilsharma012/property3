@@ -272,7 +272,8 @@ export const loginUser: RequestHandler = async (req, res) => {
       // Normalize phone to support various formats stored in DB (+91 987..., +91987..., 987...)
       const digits = String(phone || "").replace(/\D/g, "");
       const e164 = toE164(String(phone || ""));
-      const spaced = digits.length >= 10 ? `+91 ${digits.slice(-10)}` : undefined;
+      const spaced =
+        digits.length >= 10 ? `+91 ${digits.slice(-10)}` : undefined;
       const plain = digits.length >= 10 ? `+91${digits.slice(-10)}` : undefined;
 
       // Try all variants and email
@@ -290,7 +291,8 @@ export const loginUser: RequestHandler = async (req, res) => {
     } else if (phone) {
       const digits = String(phone || "").replace(/\D/g, "");
       const e164 = toE164(String(phone || ""));
-      const spaced = digits.length >= 10 ? `+91 ${digits.slice(-10)}` : undefined;
+      const spaced =
+        digits.length >= 10 ? `+91 ${digits.slice(-10)}` : undefined;
       const plain = digits.length >= 10 ? `+91${digits.slice(-10)}` : undefined;
       query = {
         $or: [
