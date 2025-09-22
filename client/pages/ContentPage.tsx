@@ -98,7 +98,7 @@ export default function ContentPage() {
     try {
       setLoading(true);
       const resolvedSlug = slug || window.location.pathname.replace(/^\//, "");
-    const response = await fetch(`/api/pages/${resolvedSlug}`);
+      const response = await fetch(`/api/pages/${resolvedSlug}`);
 
       if (response.ok) {
         const data = await response.json();

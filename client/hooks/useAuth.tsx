@@ -67,7 +67,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const login = (newToken: string, newUser: User) => {
     // Clear any existing toasts (flash errors) on successful login
-    try { clearToasts(); } catch {}
+    try {
+      clearToasts();
+    } catch {}
     localStorage.setItem("token", newToken);
     localStorage.setItem("user", JSON.stringify(newUser));
     setToken(newToken);
@@ -75,7 +77,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const logout = () => {
-    try { clearToasts(); } catch {}
+    try {
+      clearToasts();
+    } catch {}
     localStorage.removeItem("token");
     localStorage.removeItem("user");
     setToken(null);

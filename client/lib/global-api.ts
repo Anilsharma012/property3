@@ -3,21 +3,21 @@ import { createApiUrl } from "./api";
 import { safeReadResponse } from "./response-utils";
 
 // Make global fetch resilient: wrap native fetch so network failures return a safe Response-like object
-if (typeof window !== 'undefined' && typeof window.fetch === 'function') {
+if (typeof window !== "undefined" && typeof window.fetch === "function") {
   const _nativeFetch = window.fetch.bind(window);
   (window as any).fetch = (...args: any[]) => {
     try {
       const p = _nativeFetch(...args);
       return p.catch((err: any) => {
-        console.error('Wrapped fetch network error:', err?.message || err);
+        console.error("Wrapped fetch network error:", err?.message || err);
         return {
           ok: false,
           status: 0,
           async json() {
-            return { error: 'Network error' };
+            return { error: "Network error" };
           },
           async text() {
-            return '';
+            return "";
           },
           clone() {
             return this;
@@ -25,15 +25,15 @@ if (typeof window !== 'undefined' && typeof window.fetch === 'function') {
         } as any;
       });
     } catch (err) {
-      console.error('Wrapped fetch unexpected error:', err);
+      console.error("Wrapped fetch unexpected error:", err);
       return Promise.resolve({
         ok: false,
         status: 0,
         async json() {
-          return { error: 'Network error' };
+          return { error: "Network error" };
         },
         async text() {
-          return '';
+          return "";
         },
         clone() {
           return this;

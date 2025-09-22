@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { loginWithGooglePopup, sendOtp, onAuth, auth, formatPhone } from "../lib/firebase";
+import {
+  loginWithGooglePopup,
+  sendOtp,
+  onAuth,
+  auth,
+  formatPhone,
+} from "../lib/firebase";
 import { signOut } from "firebase/auth";
 
 export default function Login() {
@@ -58,8 +64,16 @@ export default function Login() {
     return (
       <div className="max-w-md mx-auto p-6">
         <h2 className="text-2xl font-semibold mb-4">Welcome</h2>
-        <p className="mb-2">{user.displayName || user.phoneNumber || user.email}</p>
-        <pre className="text-xs text-gray-600 mb-4">{JSON.stringify({ uid: user.uid, email: user.email, phone: user.phoneNumber }, null, 2)}</pre>
+        <p className="mb-2">
+          {user.displayName || user.phoneNumber || user.email}
+        </p>
+        <pre className="text-xs text-gray-600 mb-4">
+          {JSON.stringify(
+            { uid: user.uid, email: user.email, phone: user.phoneNumber },
+            null,
+            2,
+          )}
+        </pre>
         <button
           className="px-4 py-2 bg-red-600 text-white rounded"
           onClick={() => signOut(auth)}

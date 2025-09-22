@@ -11,7 +11,8 @@ export default function App() {
   return (
     <BrowserRouter>
       <nav className="p-4 border-b">
-        <Link to="/">Home</Link> | <Link to="/login">Login</Link> | <Link to="/dashboard">Dashboard</Link>
+        <Link to="/">Home</Link> | <Link to="/login">Login</Link> |{" "}
+        <Link to="/dashboard">Dashboard</Link>
       </nav>
       <Routes>
         <Route path="/login" element={<LoginPage />} />

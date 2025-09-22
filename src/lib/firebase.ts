@@ -13,9 +13,12 @@ import {
 } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY || "AIzaSyAAB9dXWrymvyJSrE8Qg3Op4vXQMEtv2hw",
+  apiKey:
+    import.meta.env.VITE_FIREBASE_API_KEY ||
+    "AIzaSyAAB9dXWrymvyJSrE8Qg3Op4vXQMEtv2hw",
   authDomain:
-    import.meta.env.VITE_FIREBASE_AUTH_DOMAIN || "aashish-properties.firebaseapp.com",
+    import.meta.env.VITE_FIREBASE_AUTH_DOMAIN ||
+    "aashish-properties.firebaseapp.com",
   projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID || "aashish-properties",
   storageBucket:
     import.meta.env.VITE_FIREBASE_STORAGE_BUCKET ||
@@ -25,8 +28,7 @@ const firebaseConfig = {
   appId:
     import.meta.env.VITE_FIREBASE_APP_ID ||
     "1:1074799820866:web:60035a614911eb876faddb",
-  measurementId:
-    import.meta.env.VITE_FIREBASE_MEASUREMENT_ID || "G-WJS8TWNW00",
+  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID || "G-WJS8TWNW00",
 };
 
 const app = initializeApp(firebaseConfig);
@@ -49,7 +51,11 @@ export function ensureRecaptcha(containerId = "recaptcha-container") {
   try {
     if (!_recaptcha) {
       // eslint-disable-next-line no-undef
-      _recaptcha = new RecaptchaVerifier(containerId, { size: "invisible" }, auth);
+      _recaptcha = new RecaptchaVerifier(
+        containerId,
+        { size: "invisible" },
+        auth,
+      );
     }
     return _recaptcha;
   } catch (err) {
