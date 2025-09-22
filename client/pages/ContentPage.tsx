@@ -97,7 +97,8 @@ export default function ContentPage() {
   const fetchPage = async () => {
     try {
       setLoading(true);
-      const response = await fetch(`/api/pages/${slug}`);
+      const resolvedSlug = slug || window.location.pathname.replace(/^\//, "");
+    const response = await fetch(`/api/pages/${resolvedSlug}`);
 
       if (response.ok) {
         const data = await response.json();
