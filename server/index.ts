@@ -527,6 +527,8 @@ export function createServer() {
     // Added per user report to allow requests from this domain
     "https://dutiful-soliloquy.net",
     "http://dutiful-soliloquy.net",
+    // Builder preview ephemeral domain used in this workspace
+    "https://vast-reconsideration.com",
   ];
 
   const allowedOriginPatterns = [
