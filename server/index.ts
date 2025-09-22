@@ -544,6 +544,8 @@ export function createServer() {
     /^http?:\/\/aashish\.posttrr\.com$/i,
     // Allow the dutiful-soliloquy domain and any subdomain
     /^(https?:\/\/)?([a-z0-9-]+\.)*dutiful-soliloquy\.net$/i,
+    // Allow Builder preview domains like vast-reconsideration.com
+    /^(https?:\/\/)?[a-z0-9-]+-reconsideration\.com$/i,
   ];
 
   // Allow configuring additional origins via env and provide an escape hatch for staging/demo deployments
