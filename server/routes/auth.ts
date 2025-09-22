@@ -269,11 +269,39 @@ export const loginUser: RequestHandler = async (req, res) => {
       // Staff login by username
       query = { username };
     } else if (email && phone) {
-      query = { $or: [{ email }, { phone }] };
+      // Normalize phone to support various formats stored in DB (+91 987..., +91987..., 987...)
+      const digits = String(phone || "").replace(/\D/g, "");
+      const e164 = toE164(String(phone || ""));
+      const spaced =
+        digits.length >= 10 ? `+91 ${digits.slice(-10)}` : undefined;
+      const plain = digits.length >= 10 ? `+91${digits.slice(-10)}` : undefined;
+
+      // Try all variants and email
+      query = {
+        $or: [
+          { email },
+          ...(spaced ? [{ phone: spaced }] : []),
+          ...(plain ? [{ phone: plain }] : []),
+          { phone: phone },
+          { phone: e164 },
+        ],
+      };
     } else if (email) {
       query = { email };
     } else if (phone) {
-      query = { phone };
+      const digits = String(phone || "").replace(/\D/g, "");
+      const e164 = toE164(String(phone || ""));
+      const spaced =
+        digits.length >= 10 ? `+91 ${digits.slice(-10)}` : undefined;
+      const plain = digits.length >= 10 ? `+91${digits.slice(-10)}` : undefined;
+      query = {
+        $or: [
+          ...(spaced ? [{ phone: spaced }] : []),
+          ...(plain ? [{ phone: plain }] : []),
+          { phone: phone },
+          { phone: e164 },
+        ],
+      };
     } else {
       return res.status(400).json({
         success: false,
@@ -282,7 +310,7 @@ export const loginUser: RequestHandler = async (req, res) => {
     }
 
     // Support unified login - don't filter by userType for login
-    // Users can login with any userType using the same credentialsialsng the same credentials
+    // Users can login with any userType using the same credentials
 
     // Find user by email, phone, or username
     const user = await db.collection("users").findOne(query);
