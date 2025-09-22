@@ -454,7 +454,7 @@ export default function PropertyDetail() {
                                 : (image?.url ?? "/placeholder.png")
                             }
                             alt={`${property.title} ${index + 1}`}
-                            className={`w-20 h-16 object-cover rounded cursor-pointer border-2 ${
+                            className={`w-20 h-16 rounded cursor-pointer border-2 ${
                               index === currentImageIndex
                                 ? "border-[#C70000]"
                                 : "border-transparent"
