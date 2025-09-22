@@ -398,7 +398,7 @@ export default function PropertyDetail() {
                         "/placeholder.png"
                       }
                       alt={property.title}
-                      className="w-full h-full object-cover rounded-t-lg"
+                      className="w-full h-full rounded-t-lg object-center"
                       onError={(e) => {
                         const target = e.target as HTMLImageElement;
                         target.src = "/placeholder.png";
